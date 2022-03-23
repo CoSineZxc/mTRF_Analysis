@@ -12,6 +12,10 @@ SingleSentencefileNames={SingleSentenceDirOutput.name}';
 ParagraphFileName='None';
 for NR = 1:SentenceNumber
     %% 
+    if NR==876
+        disp(NR)
+    end
+    
     if ~strcmp(ParagraphFileName,SingleSentencefileNames{NR}(1:2))
         ParagraphFileName=SingleSentencefileNames{NR}(1:2);
         WordPointer=0;
@@ -31,6 +35,11 @@ for NR = 1:SentenceNumber
     for WordNR=1:size(SingleSentenceWordList.wordlist,1)
         if WordNR~=1 && SingleSentenceTimeList.timelist(WordNR-1,2)<SingleSentenceTimeList.timelist(WordNR,1)
             PointAmount=uint8(100*(SingleSentenceTimeList.timelist(WordNR,1)-SingleSentenceTimeList.timelist(WordNR-1,2)));
+            GapTimePointList=repelem(MeanDissimilarity,PointAmount);
+            env_stim=[env_stim GapTimePointList];
+        end
+        if WordNR==1 && SingleSentenceTimeList.timelist(WordNR,1)~=0
+            PointAmount=uint8(100*(SingleSentenceTimeList.timelist(WordNR,1)-0));
             GapTimePointList=repelem(MeanDissimilarity,PointAmount);
             env_stim=[env_stim GapTimePointList];
         end
