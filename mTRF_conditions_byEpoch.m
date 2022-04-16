@@ -1,13 +1,13 @@
 clc
 clear
 
-pathIn='D:\Project\Data\preprocess\11resample\';
-load('./DissimilarityVector.mat');
+pathIn='D:\Project\Data\preprocess\Exp1\J_EEG\';
+load('./DissimilarityVector_Sliding10.mat');
 cd(pathIn);
 ssList=uipickfiles('FilterSpec', '*.set','Prompt','Select the preprocessed .set files');
 nID=size(ssList,2);
-cd('D:\Project\Code\matlab\mTRF_script_Xuanci');
-condition = 'C';
+cd('D:\Project\Code\matlab\mTRF_script_Xuanci_Exp1_Monlingual');
+condition = 'D';
 tmin=0;
 tmax=250;
 model_direction=-1;% 1: forward model, -1: backward model
@@ -68,7 +68,7 @@ for i=1:nID
 
 %     clearvars('-except',initialVars{:})
 end
-writetable(T1,strcat('D:\Project\Data\mTRF\all_epochs_',level,'_',group,'_all_r.xlsx'));
+writetable(T1,strcat('D:\Project\Data\mTRF\all_epochs_',level,'_',group,'_all_r_S10_v1.xlsx'));
 
 
 

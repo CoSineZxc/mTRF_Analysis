@@ -3,7 +3,7 @@ clc
 clear
 close all
 
-SingleSentencePath='D:\Project\Data\preprocess\1_InsertMarkers\WordAligner\';
+SingleSentencePath='D:\Project\Data\preprocess\Exp1\1_InsertMarkers\WordAligner\';
 ParagraphPath='D:\Project\Data\stimuli_SemanticDissimilarity\';
 SamplingRate=100;
 SingleSentenceDirOutput=dir(fullfile(SingleSentencePath,'*.mat'));
@@ -12,15 +12,15 @@ SingleSentencefileNames={SingleSentenceDirOutput.name}';
 ParagraphFileName='None';
 for NR = 1:SentenceNumber
     %% 
-    if NR==876
-        disp(NR)
-    end
+%     if NR==876
+%         disp(NR)
+%     end
     
     if ~strcmp(ParagraphFileName,SingleSentencefileNames{NR}(1:2))
         ParagraphFileName=SingleSentencefileNames{NR}(1:2);
         WordPointer=0;
-        ParagraphWordList=load([ParagraphPath,ParagraphFileName,'.mat'],'wordlist');
-        ParagraphWordDis=load([ParagraphPath,ParagraphFileName,'.mat'],'WordVec');
+        ParagraphWordList=load([ParagraphPath,ParagraphFileName,'_WholeSentence.mat'],'wordlist');
+        ParagraphWordDis=load([ParagraphPath,ParagraphFileName,'_WholeSentence.mat'],'WordVec');
     end
     name=SingleSentencefileNames{NR}(1:4);
     SingleSentenceWordList=load([SingleSentencePath,SingleSentencefileNames{NR}],'wordlist');
@@ -57,4 +57,4 @@ for NR = 1:SentenceNumber
     attended_stim{NR}=env_stim';
 end
 
-save('DissimilarityVector.mat','attended_stim_code','attended_stim')
+save('DissimilarityVector_WholeSentence.mat','attended_stim_code','attended_stim')
